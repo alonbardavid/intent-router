@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "main": "dist/intent-router.umd.js",
-  "module": "dist/intent-router.es5.js",
+  "module": "module/intent-router.js",
   "typings": "dist/types/intent-router.d.ts",
   "files": [
     "dist"
@@ -21,7 +20,7 @@
   "scripts": {
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc && rollup -c && rimraf compiled && typedoc --out dist/docs --target es6 --theme minimal src",
+    "build": "tsc && rimraf compiled && typedoc --out dist/docs --target es6 --theme minimal src",
     "start": "tsc -w & rollup -c -w",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -73,7 +72,6 @@
   },
   "devDependencies": {
     "@types/jest": "^21.1.0",
-    "@types/node": "^8.0.0",
     "colors": "^1.1.2",
     "commitizen": "^2.9.6",
     "coveralls": "^3.0.0",
@@ -85,6 +83,7 @@
     "lodash.camelcase": "^4.3.0",
     "prettier": "^1.4.4",
     "prompt": "^1.0.0",
+    "react-native-navigation": "^1.1.235",
     "replace-in-file": "^3.0.0-beta.2",
     "rimraf": "^2.6.1",
     "rollup": "^0.50.0",
@@ -100,5 +99,16 @@
     "typedoc": "^0.8.0",
     "typescript": "^2.3.4",
     "validate-commit-msg": "^2.12.2"
+  },
+  "dependencies": {
+    "@types/react": "^16.0.7",
+    "@types/react-native": "^0.48.9",
+    "babel-preset-react-native": "^4.0.0",
+    "mobx": "^3.3.0",
+    "react": "^16.0.0",
+    "rollup-plugin-babel": "^3.0.2"
+  },
+  "peerDependencies": {
+    "react-native-navigation": "^1.1.235"
   }
 }
