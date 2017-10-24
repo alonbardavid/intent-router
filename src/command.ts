@@ -10,6 +10,7 @@ import { SuccessfulNavigationCommand, resolveNext } from "./route"
 import { buildConfigFromMode, getCurrentMode } from "./mode"
 import { Navigation } from "react-native-navigation"
 import { merge, isPlainObject } from "lodash"
+import { autorun } from "mobx"
 
 function noop() {
   return {}
@@ -50,19 +51,35 @@ export async function startApp(config?: AppConfig) {
     Navigation.registerComponent(name, () => WrapComponent(screen))
   )
   const initCommand = await resolveNext("INIT")
-  if (initCommand == false) {
+  if (initCommand === false) {
     throw new Error("must always have a default route - handle the INIT route")
   }
   setAppMode(initCommand)
 }
-
+let observers = []
 function setAppMode(command: SuccessfulNavigationCommand, extra?: Object) {
   const navConfig = buildConfigFromMode(command.mode, command)
+  observers.forEach(unregister => unregister())
+  observers = []
   try {
     if (!navConfig.tabs) {
       Navigation.startSingleScreenApp(navConfig)
     } else {
       Navigation.startTabBasedApp(navConfig)
+      setTimeout(() => {
+        navConfig.tabs.forEach(t => {
+          if (t.badge) {
+            observers.push(
+              autorun(() => {
+                setTabBadge({
+                  ...t.badge(),
+                  tab: t.containerName
+                })
+              })
+            )
+          }
+        })
+      }, 1000)
     }
   } catch (e) {
     console.error(e)
@@ -110,4 +127,15 @@ export function popToRoot() {
 }
 export function toggleDrawer(props) {
   currentNavigator.toggleDrawer(props)
+}
+export function setTabBadge(options) {
+  const mode = getCurrentMode()
+  if (mode && mode.tabRef && mode.tabRef[options.tab] >= 0) {
+    const tabIndex = mode.tabRef[options.tab]
+    currentNavigator.setTabBadge({
+      tabIndex,
+      badge: options.badge,
+      badgeColor: options.badgeColor
+    })
+  }
 }

@@ -59,7 +59,7 @@ export function WrapComponent(Component) {
             this.dismissAutorun && this.dismissAutorun();
         }
         render() {
-            return React.createElement(Component, Object.assign({}, this.state.props, { ref: (ref) => this.componentRef = ref }));
+            return React.createElement(Component, Object.assign({}, this.state.props, { ref: (ref) => (this.componentRef = ref) }));
         }
     };
 }
@@ -72,10 +72,6 @@ export function registerScreen(name, screen) {
     screens.set(screen, { screen, name });
 }
 export function getScreenName(screen) {
-    const screenData = screens.get(screen);
-    if (!screenData) {
-        throw new Error(`${screen} cannot be found. Make sure to use registerScreen`);
-    }
-    return screenData.name;
+    return screens.get(screen).name;
 }
 //# sourceMappingURL=screen.js.map

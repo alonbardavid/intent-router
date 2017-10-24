@@ -1,5 +1,6 @@
 import { ScreenType, NavState, getScreenName, current } from "./screen"
 import { NavigationCommand, SuccessfulNavigationCommand } from "./route"
+import { cloneDeep } from "lodash"
 const modes: {
   [key: string]: ModeConfig & { tabRef: { [key: string]: number } }
 } = {}
@@ -7,6 +8,10 @@ const modes: {
 export type TabConfig = ScreenConfig & {
   label?: string
   containerName: string
+  badge?: () => {
+    badge?: number
+    badgeColor?: string
+  }
   props?: any
   icon?: any
 }
@@ -72,8 +77,10 @@ function buildNavigatorStyle(
   style: { navigatorStyle? },
   command?: SuccessfulNavigationCommand
 ) {
-  const navigatorStyle =
-    (style && style.navigatorStyle) || command.navigatorStyle || {}
+  const navigatorStyle = {
+    ...(style && style.navigatorStyle),
+    ...(command.navigatorStyle || {})
+  }
   navigatorStyle.navBarCustomView =
     navigatorStyle.navBarCustomView &&
     getScreenName(navigatorStyle.navBarCustomView)
@@ -112,11 +119,11 @@ export function buildConfigFromMode(
       }
     }
   }
-  return config
+  return cloneDeep(config)
 }
 
 export function getCurrentMode() {
-  return modes[current.mode]
+  return modes[current && current.mode]
 }
 
 export { modes }

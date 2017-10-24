@@ -11,6 +11,7 @@ import { resolveNext } from './route';
 import { buildConfigFromMode, getCurrentMode } from './mode';
 import { Navigation } from 'react-native-navigation';
 import { merge, isPlainObject } from 'lodash';
+import { autorun } from "mobx";
 function noop() { return {}; }
 function buildProps(command, extra) {
     if (command.props && typeof (command.props) !== "function") {
@@ -27,20 +28,32 @@ export function startApp(config) {
     return __awaiter(this, void 0, void 0, function* () {
         screens.forEach(({ screen, name }) => Navigation.registerComponent(name, () => WrapComponent(screen)));
         const initCommand = yield resolveNext("INIT");
-        if (initCommand == false) {
+        if (initCommand === false) {
             throw new Error("must always have a default route - handle the INIT route");
         }
         setAppMode(initCommand);
     });
 }
+let observers = [];
 function setAppMode(command, extra) {
     const navConfig = buildConfigFromMode(command.mode, command);
+    observers.forEach(unregister => unregister());
+    observers = [];
     try {
         if (!navConfig.tabs) {
             Navigation.startSingleScreenApp(navConfig);
         }
         else {
             Navigation.startTabBasedApp(navConfig);
+            setTimeout(() => {
+                navConfig.tabs.forEach((t) => {
+                    if (t.badge) {
+                        observers.push(autorun(() => {
+                            setTabBadge(Object.assign({}, t.badge(), { tab: t.containerName }));
+                        }));
+                    }
+                });
+            }, 1000);
         }
     }
     catch (e) {
@@ -88,5 +101,16 @@ export function popToRoot() {
 }
 export function toggleDrawer(props) {
     currentNavigator.toggleDrawer(props);
+}
+export function setTabBadge(options) {
+    const mode = getCurrentMode();
+    if (mode && mode.tabRef && mode.tabRef[options.tab] >= 0) {
+        const tabIndex = mode.tabRef[options.tab];
+        currentNavigator.setTabBadge({
+            tabIndex,
+            badge: options.badge,
+            badgeColor: options.badgeColor
+        });
+    }
 }
 //# sourceMappingURL=command.js.map

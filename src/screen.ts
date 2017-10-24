@@ -16,12 +16,11 @@ export type NavState = {
 export let current: NavState
 export let currentNavigator = null
 
-export function WrapComponent(Component: ScreenType) {
+export function WrapComponent(Component) {
   return class WrappedComponent extends React.Component<any, any> {
-    state: any
-    dismissAutorun: any
-    componentRef: any
-
+    state
+    dismissAutorun
+    componentRef
     constructor(props = {} as any) {
       super(props)
       this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
@@ -35,7 +34,7 @@ export function WrapComponent(Component: ScreenType) {
         return { props: restProps }
       }
     }
-    onNavigatorEvent = (event: any) => {
+    onNavigatorEvent = event => {
       const {
         children,
         navigatorEventID,
@@ -97,11 +96,5 @@ export function registerScreen(
   screens.set(screen, { screen, name })
 }
 export function getScreenName(screen: ScreenType): string {
-  const screenData = screens.get(screen)
-  if (!screenData) {
-    throw new Error(
-      `${screen} cannot be found. Make sure to use registerScreen`
-    )
-  }
-  return screenData.name
+  return screens.get(screen).name
 }

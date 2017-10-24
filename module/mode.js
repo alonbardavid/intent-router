@@ -1,4 +1,5 @@
 import { getScreenName, current } from './screen';
+import { cloneDeep } from 'lodash';
 const modes = {};
 export function addMode(name, modeConfig) {
     const tabRef = (modeConfig.tabs || []).reduce((obj, tab, i) => { obj[tab.containerName] = i; return obj; }, {});
@@ -18,7 +19,7 @@ function buildTabConfig(modeName, tab, command) {
     return Object.assign({}, tab, { screen: getScreenName((command && command.screen) || tab.screen), passProps: command ? buildProps(command) : buildProps(tab, modeName), navigatorStyle: buildNavigatorStyle(tab, command) });
 }
 function buildNavigatorStyle(style, command) {
-    const navigatorStyle = (style && style.navigatorStyle) || command.navigatorStyle || {};
+    const navigatorStyle = Object.assign({}, (style && style.navigatorStyle), (command.navigatorStyle || {}));
     navigatorStyle.navBarCustomView = navigatorStyle.navBarCustomView && getScreenName(navigatorStyle.navBarCustomView);
     return navigatorStyle;
 }
@@ -44,10 +45,10 @@ export function buildConfigFromMode(modeName, command) {
                 passProps: buildProps(mode.drawer.left)
             } });
     }
-    return config;
+    return cloneDeep(config);
 }
 export function getCurrentMode() {
-    return modes[current.mode];
+    return modes[current && current.mode];
 }
 export { modes };
 //# sourceMappingURL=mode.js.map
