@@ -4,10 +4,12 @@ import { ChangeRequest } from "../core/routes"
 import { RNNModeConfig, TabConfig } from "./types"
 
 export function bindVisiblityChange(onVisibilityChange) {
-  return new ScreenVisibilityListener({
+  const listener = new ScreenVisibilityListener({
     didAppear: onVisibilityChange.bind(this, "didAppear"),
     didDisappear: onVisibilityChange.bind(this, "didDisappear")
   })
+  listener.register()
+  return listener
 }
 export function registerComponent(name, component) {
   Navigation.registerComponent(name, () => component)
@@ -29,7 +31,7 @@ function buildTabConfig(
   return {
     ...tab,
     screen: getScreenName(tab.screen),
-    passProps: change ? buildProps(change) : buildProps(tab)
+    passProps: change && change.props ? buildProps(change) : buildProps(tab)
   }
 }
 function commandToStartOptions(

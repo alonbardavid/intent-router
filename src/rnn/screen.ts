@@ -21,7 +21,7 @@ export class ScreenManager {
     this.screenByName.set(name, { screen, name })
     registerComponent(name, WrapComponent(screen, this.setNavigator))
   }
-  getScreenName(screen: ScreenType): string {
+  getScreenName = (screen: ScreenType): string => {
     return this.namesByScreen.get(screen).name
   }
   getScreenFromName(name: string) {

@@ -1,11 +1,16 @@
 {
   "name": "intent-router",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "keywords": [],
   "module": "module/intent-router.js",
   "main":"module/index.js",
   "typings": "dist/types/intent-router.d.ts",
+  "files": [
+    "dist",
+    "module",
+    "src"
+  ],
   "author": "alon bar david <me@alonbd.com>",
   "repository": {
     "type": "git",
