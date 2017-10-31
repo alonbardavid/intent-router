@@ -1,5 +1,3 @@
-export { registerScreen, getScreenName, screens } from './screen';
-export * from './command';
-export { addRoute } from './route';
-export { addMode } from './mode';
+import rnnIntentRouter from './rnn';
+export default rnnIntentRouter;
 //# sourceMappingURL=index.js.map

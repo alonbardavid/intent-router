@@ -1,9 +1,10 @@
 {
   "name": "intent-router",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "keywords": [],
   "module": "module/intent-router.js",
+  "main":"module/index.js",
   "typings": "dist/types/intent-router.d.ts",
   "files": [
     "dist"
@@ -18,13 +19,12 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
     "build": "tsc && rimraf compiled && typedoc --out dist/docs --target es6 --theme minimal src",
     "start": "tsc -w & rollup -c -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "test:prod": "npm run test -- --coverage --no-cache",
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "commit": "git-cz",
@@ -93,9 +93,6 @@
     "semantic-release": "^8.0.0",
     "ts-jest": "^21.0.0",
     "ts-node": "^3.0.6",
-    "tslint": "^5.4.3",
-    "tslint-config-prettier": "^1.1.0",
-    "tslint-config-standard": "^6.0.0",
     "typedoc": "^0.8.0",
     "typescript": "^2.3.4",
     "validate-commit-msg": "^2.12.2"
