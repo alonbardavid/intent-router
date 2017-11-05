@@ -1,3 +1,3 @@
-import rnnIntentRouter from "./rnn"
+import { IntentRouter, INTENT_INIT } from "./core/intent-router"
 
-export default rnnIntentRouter
+export { IntentRouter }

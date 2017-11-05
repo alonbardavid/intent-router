@@ -10,22 +10,17 @@ class First extends React.Component {
     return null;
   }
 }
-class TestRouter extends IntentRouter<any>{
-  calls =[];
-  async _onIntent(command){
-    this.calls.push(command);
-  }
-}
 test("when starting app, should fire init intent",async ()=>{
-
-  const router = new TestRouter();
+  const calls =[];
+  const router = new IntentRouter<any>();
+  router.onIntent = async (intent,command)=>calls.push(command);
   router.route({
     when:INTENT_INIT,
     to:First
   });
 
   await router.startApp();
-  const command = router.calls[router.calls.length - 1];
+  const command = calls[calls.length - 1];
   expect(command.type).toEqual(COMMAND_TYPE_CHANGE_MODE);
   expect(command.change.screen).toEqual(First);
 });

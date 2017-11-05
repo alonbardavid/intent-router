@@ -1,10 +1,10 @@
 {
   "name": "intent-router",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "keywords": [],
   "module": "module/intent-router.js",
-  "main":"module/index.js",
+  "main": "module/index.js",
   "typings": "dist/types/intent-router.d.ts",
   "files": [
     "dist",
@@ -103,6 +103,7 @@
     "@types/react": "^16.0.7",
     "@types/react-native": "^0.48.9",
     "babel-preset-react-native": "^4.0.0",
+    "events-async": "^1.1.0",
     "mobx": "^3.3.0",
     "react": "^16.0.0",
     "rollup-plugin-babel": "^3.0.2"
