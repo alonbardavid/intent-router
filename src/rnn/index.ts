@@ -49,8 +49,8 @@ export class RnnIntentRouter {
   registerScreen(screen) {
     return this.screenManager.registerScreen(screen)
   }
-  pop() {
-    return pop(this.screenManager.navigator)
+  pop(toRoot) {
+    return pop(this.screenManager.navigator, toRoot)
   }
   protected async doIntent(command: Command) {
     switch (command.type) {

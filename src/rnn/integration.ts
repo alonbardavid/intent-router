@@ -79,10 +79,15 @@ export async function changeMode(
   }
 }
 let hasLightBox = false
-export async function pop(navigator) {
+export async function pop(navigator, toRoot) {
   if (hasLightBox) {
     navigator.dismissLightBox()
     hasLightBox = false
+    if (toRoot) {
+      navigator.popToRoot()
+    }
+  } else if (toRoot) {
+    navigator.popToRoot()
   } else {
     navigator.pop()
   }
