@@ -78,7 +78,9 @@ export async function changeMode(
     return config
   }
 }
-
+export async function pop(navigator) {
+  navigator.pop()
+}
 function noop() {
   return {}
 }

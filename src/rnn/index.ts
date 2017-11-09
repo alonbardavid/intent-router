@@ -5,7 +5,7 @@ import {
   COMMAND_TYPE_PUSH
 } from "../core/command-resolver"
 import { ScreenManager } from "./screen"
-import { bindVisiblityChange, changeMode, push } from "./integration"
+import { bindVisiblityChange, changeMode, push, pop } from "./integration"
 import { RNNModeConfig } from "./types"
 
 export class RnnIntentRouter {
@@ -40,6 +40,9 @@ export class RnnIntentRouter {
   }
   registerScreen(screen) {
     return this.screenManager.registerScreen(screen)
+  }
+  pop() {
+    return pop(this.screenManager.navigator)
   }
   protected async doIntent(command: Command) {
     switch (command.type) {
