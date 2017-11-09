@@ -36,10 +36,13 @@ export function WrapComponent(Component, setNavigator) {
   return class WrappedComponent extends React.Component<any, any> {
     state
     dismissAutorun
+    dismissNavigatorEvent
     componentRef
     constructor(props = {} as any) {
       super(props)
-      this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+      this.dismissNavigatorEvent = this.props.navigator.setOnNavigatorEvent(
+        this.onNavigatorEvent.bind(this)
+      )
     }
     _resolveState(props) {
       const { _resolve, ...restProps } = props
@@ -76,6 +79,7 @@ export function WrapComponent(Component, setNavigator) {
     }
     componentWillUnmount() {
       this.dismissAutorun && this.dismissAutorun()
+      this.dismissNavigatorEvent && this.dismissNavigatorEvent()
     }
     render() {
       return React.createElement(Component, {
