@@ -29,7 +29,7 @@ export class IntentRouter<ModeConfig> {
   }
   intent = (intent: IntentType) => async (params?) => {
     const resolution = this.routes.resolve(this._state, intent, params)
-    const command = await routeToCommand(null, resolution, intent)
+    const command = await routeToCommand(this._state, resolution, intent)
     return await this.onIntent(intent, command)
   }
   addMode = (name: string, config: ModeConfig) => {
