@@ -72,7 +72,7 @@ export class RouteManager {
     }
   }
   private _resolveFrom(intent: IntentType, current: NavState): RouteConfig {
-    let routes = current ? this.fromRoutes.get(current.screen) : []
+    let routes = (current ? this.fromRoutes.get(current.screen) : []) || []
     for (let route of routes) {
       if (this._matchRoute(route, intent, current)) {
         return route

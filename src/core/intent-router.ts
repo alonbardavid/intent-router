@@ -9,7 +9,7 @@ export class IntentRouter<ModeConfig> {
   onCurrentChange: (state, prevState) => void
   private _state?: NavState = null
 
-  onIntent = async (intent: string, command: any) => any
+  onIntent: (intent: string, command: any) => Promise<any> = async () => {}
 
   constructor(onCurrentChange?) {
     this.onCurrentChange = onCurrentChange || (() => {})
