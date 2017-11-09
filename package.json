@@ -85,7 +85,6 @@
     "lodash.camelcase": "^4.3.0",
     "prettier": "^1.4.4",
     "prompt": "^1.0.0",
-    "react-native-navigation": "^1.1.235",
     "replace-in-file": "^3.0.0-beta.2",
     "rimraf": "^2.6.1",
     "rollup": "^0.50.0",
@@ -97,18 +96,18 @@
     "ts-node": "^3.0.6",
     "typedoc": "^0.8.0",
     "typescript": "^2.3.4",
-    "validate-commit-msg": "^2.12.2"
-  },
-  "dependencies": {
+    "validate-commit-msg": "^2.12.2",
     "@types/react": "^16.0.7",
     "@types/react-native": "^0.48.9",
     "babel-preset-react-native": "^4.0.0",
-    "events-async": "^1.1.0",
-    "mobx": "^3.3.0",
-    "react": "^16.0.0",
     "rollup-plugin-babel": "^3.0.2"
   },
+  "dependencies": {
+    "events-async": "^1.1.0",
+    "react": "^16.0.0"
+  },
   "peerDependencies": {
-    "react-native-navigation": "^1.1.235"
+    "react-native-navigation": "^1.1.235",
+    "mobx": "^3.3.0"
   }
 }

@@ -5,8 +5,16 @@ import {
   COMMAND_TYPE_PUSH
 } from "../core/command-resolver"
 import { ScreenManager } from "./screen"
-import { bindVisiblityChange, changeMode, push, pop } from "./integration"
+import {
+  bindVisiblityChange,
+  changeMode,
+  push,
+  pop,
+  lightbox
+} from "./integration"
 import { RNNModeConfig } from "./types"
+
+export const COMMAND_TYPE_LIGHTBOX = "lightbox"
 
 export class RnnIntentRouter {
   screenManager = new ScreenManager()
@@ -55,6 +63,12 @@ export class RnnIntentRouter {
         )
       case COMMAND_TYPE_PUSH:
         return push(
+          command,
+          this.screenManager.getScreenName,
+          this.screenManager.navigator
+        )
+      case COMMAND_TYPE_LIGHTBOX:
+        return lightbox(
           command,
           this.screenManager.getScreenName,
           this.screenManager.navigator

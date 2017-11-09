@@ -78,8 +78,23 @@ export async function changeMode(
     return config
   }
 }
+let hasLightBox = false
 export async function pop(navigator) {
-  navigator.pop()
+  if (hasLightBox) {
+    navigator.dismissLightBox()
+    hasLightBox = false
+  } else {
+    navigator.pop()
+  }
+}
+export async function lightbox(
+  command: Command,
+  getScreenName: (screen) => string,
+  navigator
+) {
+  const options = commandToPushOptions(command.change, getScreenName)
+  navigator.showLightBox(options)
+  hasLightBox = true
 }
 function noop() {
   return {}
