@@ -26,6 +26,7 @@ export async function routeToCommand(
   }
   const { when, from, to, resolve, match, ...customProps } = route
   const changeRequest = merge(
+    {},
     current || {},
     { screen: to },
     customProps,
