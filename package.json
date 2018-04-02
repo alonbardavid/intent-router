@@ -1,6 +1,6 @@
 {
   "name": "intent-router",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "description": "",
   "keywords": [],
   "module": "module/intent-router.js",
@@ -74,6 +74,9 @@
   },
   "devDependencies": {
     "@types/jest": "^21.1.0",
+    "@types/react": "^16.0.7",
+    "@types/react-native": "^0.48.9",
+    "babel-preset-react-native": "^4.0.0",
     "colors": "^1.1.2",
     "commitizen": "^2.9.6",
     "coveralls": "^3.0.0",
@@ -86,8 +89,9 @@
     "prettier": "^1.4.4",
     "prompt": "^1.0.0",
     "replace-in-file": "^3.0.0-beta.2",
-    "rimraf": "^2.6.1",
+    "rimraf": "^2.6.2",
     "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
@@ -96,18 +100,11 @@
     "ts-node": "^3.0.6",
     "typedoc": "^0.8.0",
     "typescript": "^2.3.4",
-    "validate-commit-msg": "^2.12.2",
-    "@types/react": "^16.0.7",
-    "@types/react-native": "^0.48.9",
-    "babel-preset-react-native": "^4.0.0",
-    "rollup-plugin-babel": "^3.0.2"
+    "validate-commit-msg": "^2.12.2"
   },
   "dependencies": {
     "events-async": "^1.1.0",
     "react": "^16.0.0"
   },
-  "peerDependencies": {
-    "react-native-navigation": "^1.1.235",
-    "mobx": "^3.3.0"
-  }
+  "peerDependencies": {}
 }

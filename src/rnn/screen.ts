@@ -68,7 +68,7 @@ export function WrapComponent(Component, setNavigator) {
     }
     componentWillMount() {
       let firstRun = true
-      this.state = this._resolveState(this.props)
+      this.setState(this._resolveState(this.props))
       this.dismissAutorun = autorun(() => {
         const newState = this._resolveState(this.props)
         if (!firstRun) {
