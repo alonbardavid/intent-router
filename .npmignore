@@ -1,3 +1,6 @@
 __tests__
 dist/docs
 !module
+example
+docs
+tools
