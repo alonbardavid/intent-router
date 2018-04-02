@@ -1,46 +1,62 @@
 import React from 'react';
-import {View,StyleSheet,Text,Button} from 'react-native';
+import {View,StyleSheet,Text,Button,TextInput} from 'react-native';
+import {observer} from 'mobx-react';
 
+export class MainScreen extends React.Component {
+
+  state = {
+    id:"1"
+  }
+  onChangeId = (id)=>{
+    this.setState({id})
+  }
+  render(){
+    const {toCounter,toParamed,toTabbed} = this.props;
+    return <View style={[styles.scene,styles.white]} >
+      <Text style={[styles.reverse]}>Main Screen</Text>
+      <Button onPress={toCounter} title="To Counter"  />
+      <Button onPress={toTabbed} title="To Tabbed"  />
+      <Text style={{marginVertical:20}} >Change input and press go to navigate to a parameterized route</Text>
+      <View style={{flexDirection:"row"}}>
+        <TextInput value={this.state.id} onChangeText={this.onChangeId}/>
+        <Button onPress={()=>toParamed({id:this.state.id})} title="Go"/>
+
+      </View>
+
+    </View>
+  }
+}
 export class BlueScreen extends React.Component {
   render(){
-    const {toGreen} = this.props;
+    const {toMain} = this.props;
     return <View style={[styles.scene,styles.blue]} >
-      <Text>Blue screen</Text>
-      <Button onPress={toGreen} title="To Green"  />
+      <Text style={styles.reverse}>Blue screen</Text>
+      <Button onPress={toMain} title="to main" />
     </View>
   }
 }
+export const CounterScene = observer(class CounterScene extends React.Component {
+  render(){
+    const {count,increment} = this.props;
+    return <View style={[styles.scene,styles.green]} >
+      <Text>Counter screen</Text>
+      <Text>Current count: {count} </Text>
+      <Button onPress={increment} title="increment counter" />
+    </View>
+  }
+})
 export class GreenScreen extends React.Component {
   render(){
-    const {toBlue} = this.props;
     return <View style={[styles.scene,styles.green]} >
       <Text>Green screen</Text>
-      <Button onPress={toBlue} title="To Blue"/>
     </View>
   }
 }
-export class RedScreen extends React.Component {
+export class ParamedScene extends React.Component {
   render(){
-    return <View style={[styles.scene,styles.red]} >
-      <Text>Red screen</Text>
-    </View>
-  }
-}
-export class WhiteScreen extends React.Component {
-  render(){
-    const {toGreen,toBlue} = this.props;
+    const {id} = this.props;
     return <View style={[styles.scene,styles.white]} >
-      <Text style={[styles.reverse]}>White screen</Text>
-      <Button onPress={toGreen} title="To Green"  />
-      <Button onPress={toBlue} title="To Blue"/>
-
-    </View>
-  }
-}
-export class BlackScreen extends React.Component {
-  render(){
-    return <View style={[styles.scene,styles.black]} >
-      <Text>Black screen</Text>
+      <Text>Paramed scene with id {id}</Text>
     </View>
   }
 }
@@ -71,6 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor:"black"
   },
   reverse:{
-    color:"black"
+    color:"white"
   }
 });

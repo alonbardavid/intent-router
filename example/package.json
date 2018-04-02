@@ -7,11 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "intent-router": "*",
     "mobx": "^4.0.0",
+    "mobx-react": "^5.0.0",
     "react": "16.2.0",
     "react-native": "0.53.3",
-    "react-native-navigation": "^1.1.408",
-    "intent-router":"*"
+    "react-native-navigation": "^1.1.408"
   },
   "devDependencies": {
     "babel-jest": "22.4.1",
