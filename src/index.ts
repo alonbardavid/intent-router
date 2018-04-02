@@ -14,6 +14,7 @@ const startApp = router.startApp.bind(router)
 export {
   registerScreen,
   router,
+  rnn,
   pop,
   route,
   intent,
