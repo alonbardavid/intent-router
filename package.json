@@ -14,7 +14,7 @@
   "author": "alon bar david <me@alonbd.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/alonbardavid/intent-router.git"
   },
   "license": "MIT",
   "engines": {
